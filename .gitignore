@@ -1,0 +1,19 @@
+# Local Python and tooling
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+.env
+.env.*
+node_modules/
+.pytest_cache/
+playwright-report/
+test-results/
+
+# User-specific material and original source CSV
+FORM_ANSWERS.md
+SUBMISSION_CHECKLIST.md
+IBM_BOB_PROMPTS.md
+project_manifest.json
+screenshots/ibm_bob_review_actual.png
+data/200_sales_data_original.csv

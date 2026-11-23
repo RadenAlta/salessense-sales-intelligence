@@ -1,0 +1,91 @@
+{
+  "source_file": "200_sales_data_original.csv",
+  "source_url": "https://drive.google.com/file/d/1gIV-unupWtXoHMMqwHdFqwoZGo9I-80S/view",
+  "source_sha256": "a8ac5d76856bb813758585f6d63723d3a1269a4980bc1db92b70bb3d8c735c28",
+  "received_rows": 201,
+  "valid_rows": 198,
+  "excluded_rows": 3,
+  "exclusions": [
+    {
+      "source_line": 18,
+      "reason": "kolom penting kosong",
+      "raw_row": [
+        "1063",
+        "5/18/2023",
+        "Bob",
+        "West",
+        "3098.87",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "West-Bob",
+        "",
+        "",
+        "",
+        ""
+      ]
+    },
+    {
+      "source_line": 21,
+      "reason": "kolom penting kosong",
+      "raw_row": [
+        "1080",
+        "8/24/2023",
+        "",
+        "West",
+        "1493.95",
+        "17",
+        "Furniture",
+        "2742.67",
+        "2979.64",
+        "Returning",
+        "39",
+        "Food",
+        "3577.69",
+        "3931.25",
+        "Returning",
+        "0.21",
+        "Cash",
+        "Retail"
+      ]
+    },
+    {
+      "source_line": 202,
+      "reason": "kolom penting kosong",
+      "raw_row": [
+        "Bob",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        "",
+        ""
+      ]
+    }
+  ],
+  "date_range": {
+    "min": "2023-01-01",
+    "max": "2023-12-30"
+  },
+  "total_revenue": 1061007.89,
+  "total_quantity": 4681,
+  "average_discount_percent": 14.95,
+  "revenue_currency": "dataset tidak menyebutkan mata uang; UI menggunakan satuan generik (unit)",
+  "validation_policy": "Baris tidak lengkap/kolom bergeser/diskon tidak masuk akal dikeluarkan. Sales_Amount dipakai langsung, bukan dihitung dari qty x Unit_Price karena data sumber tidak konsisten."
+}

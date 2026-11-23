@@ -1,0 +1,114 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="description" content="SalesSense: dashboard penjualan berbasis data workshop IBM SkillsBuild dengan asisten insight berbasis aturan." />
+  <title>SalesSense | Sales Intelligence Studio</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- Tailwind and Chart.js intentionally follow the workshop technology stack.
+       The interface and charts retain usable local fallbacks without CDN access. -->
+  <script src="https://cdn.tailwindcss.com" defer></script>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.8/dist/chart.umd.min.js" defer></script>
+  <script src="script.js" defer></script>
+</head>
+<body>
+  <div class="app-shell">
+    <aside class="sidebar" aria-label="Navigasi utama">
+      <a class="brand" href="#overview" aria-label="SalesSense Dashboard">
+        <span class="brand-mark"><svg viewBox="0 0 36 36" width="28" height="28" aria-hidden="true"><path d="M5 23 13 15l7 6 11-13" fill="none" stroke="currentColor" stroke-width="3.5" stroke-linecap="round" stroke-linejoin="round"/><circle cx="28" cy="8" r="3.5" fill="#8bf1c4"/></svg></span>
+        <span><b>sales<span class="brand-accent">sense</span></b><small>INTELLIGENCE STUDIO</small></span>
+      </a>
+      <div class="nav-heading">WORKSPACE</div>
+      <nav>
+        <a href="#overview" class="nav-link active" data-nav="overview"><span class="nav-icon">▦</span> Overview</a>
+        <a href="#analytics" class="nav-link" data-nav="analytics"><span class="nav-icon">⌁</span> Analytics</a>
+        <a href="#agent" class="nav-link" data-nav="agent"><span class="nav-icon">✳</span> Insight Agent <span class="nav-pill">BETA</span></a>
+        <a href="#data-table" class="nav-link" data-nav="data-table"><span class="nav-icon">☷</span> Transactions</a>
+      </nav>
+      <div class="side-bottom">
+        <div class="data-badge"><span class="live-dot"></span> Verified workshop data <small id="sidebarCount">Loading data…</small></div>
+        <div class="side-divider"></div>
+        <p class="sidebar-caption">IBM SkillsBuild × Hacktiv8<br />University Education · 2026</p>
+        <p class="side-meta">Capstone prototype · v1.0</p>
+      </div>
+    </aside>
+
+    <main id="overview" class="main-content">
+      <header class="topbar">
+        <div class="breadcrumbs"><span>Workspace</span><span class="chev">/</span><strong>Sales Intelligence</strong></div>
+        <div class="topbar-right"><span class="dataset-status" id="datasetStatus"><span class="live-dot"></span> Dataset loading</span><button class="icon-btn" id="themeBtn" type="button" title="Ganti tema" aria-label="Ganti tema warna">◐</button><span class="avatar" title="Workshop Project">SS</span></div>
+      </header>
+
+      <div class="content-body">
+        <section class="hero" aria-labelledby="hero-title">
+          <div class="hero-text"><div class="eyebrow"><span class="live-dot"></span> SALES INTELLIGENCE · ANALYTICS WORKSPACE</div>
+            <h1 id="hero-title">Decisions start with <span>better data.</span></h1>
+            <p>Monitor your sales performance, explore revenue drivers and uncover actionable insights — all in one workspace.</p>
+            <div class="hero-tags"><span>2023 Sales Dataset</span><span>Interactive Analytics</span><span>Explainable Insights</span></div>
+          </div>
+          <div class="hero-decoration" aria-hidden="true"><div class="orbit orbit-a"></div><div class="orbit orbit-b"></div><div class="orbit orbit-c"></div><div class="orbit-center">✳</div></div>
+        </section>
+
+        <section class="filters-panel" aria-label="Filter dataset">
+          <div class="section-head filters-title"><div><h2>Explore your data</h2><p>All visuals refresh automatically when filters change.</p></div><div class="filters-actions"><button class="button ghost" type="button" id="resetFilters">↺ Reset</button><button class="button export" type="button" id="exportBtn">↓ Export CSV</button></div></div>
+          <div class="filters-grid">
+            <label>Region<select id="regionFilter"><option value="">All regions</option></select></label>
+            <label>Product category<select id="categoryFilter"><option value="">All categories</option></select></label>
+            <label>Customer type<select id="customerFilter"><option value="">All customers</option></select></label>
+            <label>Sales channel<select id="channelFilter"><option value="">All channels</option></select></label>
+          </div>
+          <p class="filter-note"><span class="mini-dot"></span><strong id="activeRecords">—</strong> validated transactions in current view <span class="note-divider">·</span> Source: 200_sales_data.csv <span class="note-divider">·</span> Amounts shown in dataset units (currency unspecified)</p>
+        </section>
+
+        <section class="metric-section" aria-labelledby="metric-title"><div class="section-head"><div><h2 id="metric-title">Performance at a glance</h2><p>Core metrics for the selected segment</p></div><span class="subtle-label">LIVE FILTERED VIEW</span></div>
+          <div class="metrics-grid">
+            <article class="metric-card mint"><div class="metric-top"><span>Total revenue</span><span class="metric-icon">↗</span></div><div class="metric-value" id="kpiRevenue">—</div><div class="metric-footer"><span class="metric-tag">SALES</span><span>Sum of sales amount</span></div></article>
+            <article class="metric-card violet"><div class="metric-top"><span>Total transactions</span><span class="metric-icon">▤</span></div><div class="metric-value" id="kpiTransactions">—</div><div class="metric-footer"><span class="metric-tag">ORDERS</span><span>Valid source records</span></div></article>
+            <article class="metric-card coral"><div class="metric-top"><span>Quantity sold</span><span class="metric-icon">◫</span></div><div class="metric-value" id="kpiQuantity">—</div><div class="metric-footer"><span class="metric-tag">VOLUME</span><span>Total units</span></div></article>
+            <article class="metric-card blue"><div class="metric-top"><span>Average discount</span><span class="metric-icon">%</span></div><div class="metric-value" id="kpiDiscount">—</div><div class="metric-footer"><span class="metric-tag">DISCOUNT</span><span>Unweighted per sale</span></div></article>
+          </div>
+        </section>
+
+        <section id="analytics" class="charts-section" aria-labelledby="charts-title">
+          <div class="section-head section-spaced"><div><h2 id="charts-title">Sales performance analytics</h2><p>Ten views into the same filtered dataset</p></div><span class="subtle-label">2023 · VERIFIED DATA</span></div>
+          <div class="charts-grid">
+            <article class="chart-card col-span-7"><header><div><h3>Sales trend</h3><p>Monthly revenue over time</p></div><span class="chart-label">TREND</span></header><div class="chart-content" id="trendChart" aria-label="Sales trend chart"></div></article>
+            <article class="chart-card col-span-5"><header><div><h3>Revenue by region</h3><p>Proportional regional contribution</p></div><span class="chart-label">POLAR AREA</span></header><div class="chart-content" id="regionChart" aria-label="Revenue by region polar area chart"></div></article>
+            <article class="chart-card col-span-6"><header><div><h3>Revenue by category</h3><p>Where sales value is concentrated</p></div><span class="chart-label">RANKING</span></header><div class="chart-content" id="categoryChart" aria-label="Revenue by category chart"></div></article>
+            <article class="chart-card col-span-6"><header><div><h3>Sales representatives</h3><p>Revenue by representative</p></div><span class="chart-label">COMPARISON</span></header><div class="chart-content" id="repChart" aria-label="Sales representative chart"></div></article>
+            <article class="chart-card col-span-4"><header><div><h3>Customer mix</h3><p>New vs. returning orders</p></div><span class="chart-label">SPLIT</span></header><div class="chart-content" id="customerChart" aria-label="Customer type distribution"></div></article>
+            <article class="chart-card col-span-4"><header><div><h3>Payment methods</h3><p>Transaction counts by type</p></div><span class="chart-label">SPLIT</span></header><div class="chart-content" id="paymentChart" aria-label="Payment method distribution"></div></article>
+            <article class="chart-card col-span-4"><header><div><h3>Sales channels</h3><p>Retail and online performance</p></div><span class="chart-label">SPLIT</span></header><div class="chart-content" id="channelChart" aria-label="Sales channel distribution"></div></article>
+            <article class="chart-card col-span-6"><header><div><h3>Discount vs. sales</h3><p>Individual transactions, not averages</p></div><span class="chart-label">SCATTER</span></header><div class="chart-content" id="scatterChart" aria-label="Discount vs sales scatter plot"></div></article>
+            <article class="chart-card col-span-6"><header><div><h3>Top 10 sales</h3><p>Highest-value individual transactions</p></div><span class="chart-label">TOP 10</span></header><div class="chart-content" id="topChart" aria-label="Top 10 transaction chart"></div></article>
+            <article class="chart-card col-span-12"><header><div><h3>Quantity sold by category</h3><p>Unit volume comparison across products</p></div><span class="chart-label">QUANTITY</span></header><div class="chart-content short-chart" id="quantityChart" aria-label="Quantity by product category chart"></div></article>
+          </div>
+        </section>
+
+        <section id="agent" class="agent-section" aria-labelledby="agent-title">
+          <div class="section-head"><div><h2 id="agent-title">SalesSense Insight Agent <span class="small-chip">EXPLAINABLE</span></h2><p>Ask questions about the currently selected sales data</p></div><span class="subtle-label">RULE-BASED · NO LLM API</span></div>
+          <div class="agent-grid">
+            <div class="agent-panel"><div class="agent-intro"><div class="agent-glyph">✳</div><div><h3>Your analytical copilot</h3><p>Explore a sales question. The agent identifies the intent, runs calculations on your filtered data, and explains its result.</p></div></div>
+              <div class="suggestions" aria-label="Contoh pertanyaan"><button class="suggestion" data-question="Wilayah dengan revenue tertinggi?">Top region <span>↗</span></button><button class="suggestion" data-question="Kategori produk paling laris?">Best-selling category <span>↗</span></button><button class="suggestion" data-question="Bagaimana tren penjualan bulanan?">Monthly trend <span>↗</span></button><button class="suggestion" data-question="Apa rekomendasi untuk meningkatkan penjualan?">Recommendations <span>↗</span></button></div>
+              <div class="dialogue" aria-live="polite" id="agentMessages"><div class="bubble assistant-bubble"><span class="bubble-tag">SALESSENSE AGENT</span><p>Halo! Saya bisa mengukur performa penjualan, membandingkan wilayah dan kategori, serta menyusun insight berdasarkan data yang sedang difilter. Pilih contoh pertanyaan atau tulis sendiri.</p></div></div>
+              <form id="agentForm" class="agent-compose"><input id="agentInput" aria-label="Ketik pertanyaan analisis data" placeholder="Tanyakan sesuatu tentang penjualan…" autocomplete="off" required maxlength="300"/><button type="submit">Ask agent <span>↗</span></button></form>
+              <p class="agent-disclaimer">Prototype ini memakai intent routing dan aturan analitis transparan. Tidak menggunakan IBM Granite/LLM dan tidak mengirim data ke layanan AI.</p>
+            </div>
+            <aside class="agent-trace" aria-labelledby="trace-title"><div class="trace-title"><div><span class="trace-eyebrow">AGENT WORKFLOW</span><h3 id="trace-title">How the answer was made</h3></div><span class="workflow-icon">⌘</span></div>
+              <div class="trace-steps" id="agentTrace"><div class="trace-step"><span class="step-indicator">01</span><div><strong>Observe</strong><p>Read the question and applied filters</p></div></div><div class="trace-step"><span class="step-indicator">02</span><div><strong>Plan</strong><p>Select analytical operation</p></div></div><div class="trace-step"><span class="step-indicator">03</span><div><strong>Analyze</strong><p>Query validated transaction data</p></div></div><div class="trace-step"><span class="step-indicator">04</span><div><strong>Respond</strong><p>Explain numerical evidence and limitations</p></div></div></div>
+              <div class="trace-info"><span class="live-dot"></span> Calculations are reproducible from the source JSON.</div>
+            </aside>
+          </div>
+        </section>
+
+        <section id="data-table" class="table-section" aria-labelledby="table-title"><div class="section-head"><div><h2 id="table-title">Transaction explorer</h2><p>Sample of filtered source records, with export for the full set</p></div><span id="tableCount" class="subtle-label">—</span></div>
+          <div class="table-wrap"><table><thead><tr><th>Date</th><th>Region</th><th>Category</th><th>Rep</th><th>Channel</th><th class="number">Quantity</th><th class="number">Discount</th><th class="number">Revenue</th></tr></thead><tbody id="transactionRows"><tr><td colspan="8">Loading records…</td></tr></tbody></table></div>
+          <p class="data-footer">Source: IBM SkillsBuild workshop “200_sales_data.csv” · 3 malformed or incomplete records removed and documented in <code>data/data_quality_report.json</code>. Values are dataset units, not assumed IDR/USD.</p>
+        </section>
+        <footer class="footer"><span>© 2026 SalesSense · IBM SkillsBuild × Hacktiv8 University Education capstone</span><span>Built for learning · Data-first decisions</span></footer>
+      </div>
+    </main>
+  </div>
+</body>
+</html>

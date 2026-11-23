@@ -1,0 +1,16 @@
+{
+  "desktop": {
+    "rows": 198,
+    "revenue": "1,061,007.89 u",
+    "quantity": "4,681",
+    "average_discount": "14.95%",
+    "agent_reply": "Segmen dengan revenue terbesar adalah North (317,373 u). North: 317,373 u · South: 269,862 u · West: 252,721 u · East: 221,052 u. Perbandingan ini menggunakan 198 transaksi yang lolos filter.",
+    "north_rows": 64,
+    "charts_validated": 10,
+    "js_page_errors": []
+  },
+  "mobile": {
+    "horizontal_overflow_px": 0,
+    "kpi_transactions": "198"
+  }
+}
