@@ -110,4 +110,4 @@ This is an **independent student project**, not an official IBM or Hacktiv8 prod
 
 ---
 
-**Created by [Raden Dimas Taufik Rahmat](https://github.com/RadenAlta)** · Universitas Siber Asia · 2026
+**Created by [Raden Dimas Taufik Rahmat](https://github.com/RadenAlta)** · Asia Cyber University · 2026
